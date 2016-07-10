@@ -1,0 +1,26 @@
+<RCC>
+    <qresource prefix="/character">
+        <file>Image/character/bandit/bandit_0b_mirror.bmp</file>
+        <file>Image/character/bandit/bandit_0b.bmp</file>
+        <file>Image/character/bandit/bandit_1b_mirror.bmp</file>
+        <file>Image/character/bandit/bandit_1b.bmp</file>
+        <file alias="bandit_f.bmp">Image/character/bandit/bandit_f.bmp</file>
+        <file alias="bandit_s.bmp">Image/character/bandit/bandit_s.bmp</file>
+        <file alias="bandit_0">Image/character/bandit/bandit_0.png</file>
+        <file alias="bandit_0_mirror">Image/character/bandit/bandit_0_mirror.png</file>
+    </qresource>
+    <qresource prefix="/background">
+        <file alias="stage1_forest1.bmp">Image/bg/stage1/forestm1.bmp</file>
+        <file alias="stage1_forest2.bmp">Image/bg/stage1/forestm2.bmp</file>
+        <file alias="stage1_forest3.bmp">Image/bg/stage1/forestm3.bmp</file>
+        <file alias="stage1_forest4.bmp">Image/bg/stage1/forestm4.bmp</file>
+        <file alias="stage1_forests_1.bmp">Image/bg/stage1/forests.bmp</file>
+        <file alias="stage1_land1.bmp">Image/bg/stage1/land1.bmp</file>
+        <file alias="stage1_land2.bmp">Image/bg/stage1/land2.bmp</file>
+        <file alias="stage1_land3.bmp">Image/bg/stage1/land3.bmp</file>
+        <file alias="stage1_land4.bmp">Image/bg/stage1/land4.bmp</file>
+        <file>Image/bg/stage1/s.bmp</file>
+        <file alias="stage1_forests_2">Image/bg/stage1/forestt.png</file>
+    </qresource>
+    <qresource prefix="/bgm"/>
+</RCC>

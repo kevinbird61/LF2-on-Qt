@@ -6,6 +6,7 @@ StageSelect::StageSelect()
     p1_loc_y = 200;
     moving_state = 0;
     face_mode = 0;
+    iter_num = 1;
     // Setting character frame
     p1 = new Player();
     p1->setPicture(":/character/bandit_0",0,0);
@@ -50,31 +51,31 @@ void StageSelect::keyPressEvent(QKeyEvent *event)
     switch(event->key()){
     // Dealing the P1
     case Qt::Key_W:
-        moving_state++;
+        moving_state+=2*iter_num;
         character_moving(face_mode);
         p1_loc_y -= 5;
         break;
     case Qt::Key_S:
-        moving_state++;
+        moving_state+=2*iter_num;
         character_moving(face_mode);
         p1_loc_y += 5;
         break;
     case Qt::Key_A:
-        moving_state++;
+        moving_state+=2*iter_num;
         face_mode = 1;
         character_moving(face_mode);
         p1_loc_x -= 5;
         break;
     case Qt::Key_D:
-        moving_state++;
+        moving_state+=2*iter_num;
         face_mode = 0;
         character_moving(face_mode);
         p1_loc_x += 5;
         break;
     }
 
-    if(moving_state >= 25){
-        moving_state=0;
+    if(moving_state >= 25 || moving_state < 0){
+        iter_num = -iter_num;
     }
     boundary_checking();
     p1->setPos(p1_loc_x,p1_loc_y);

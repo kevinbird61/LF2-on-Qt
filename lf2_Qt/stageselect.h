@@ -23,6 +23,7 @@ private:
     int y_limit;
     int moving_state;
     int face_mode;
+    int iter_num;
 };
 
 #endif // STAGESELECT_H

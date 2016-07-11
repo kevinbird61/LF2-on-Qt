@@ -22,5 +22,10 @@
         <file>Image/bg/stage1/s.bmp</file>
         <file alias="stage1_forests_2">Image/bg/stage1/forestt.png</file>
     </qresource>
-    <qresource prefix="/bgm"/>
+    <qresource prefix="/sound_effect">
+        <file alias="walk">sound/effect/walk3.wav</file>
+    </qresource>
+    <qresource prefix="/sound_bgm">
+        <file alias="main">sound/bgm/main.mp3</file>
+    </qresource>
 </RCC>

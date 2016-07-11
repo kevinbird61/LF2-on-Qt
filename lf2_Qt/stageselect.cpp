@@ -13,6 +13,13 @@ StageSelect::StageSelect()
     p1->setZValue(1);
     p1->setPos(p1_loc_x,p1_loc_y);
     addItem(p1);
+
+    /* For bgm (Failure to load the mediasource)
+    bgm = new QMediaPlayer;
+    //connect(bgm,SIGNAL(positionChanged(qint64)),this,SLOT(positionChanged(qint64)));
+    bgm->setMedia(QUrl("qrc:/sound_bgm/main"));
+    bgm->setVolume(50);
+    bgm->play();*/
 }
 
 void StageSelect::bgSetting()
@@ -107,6 +114,10 @@ void StageSelect::character_moving(int mode)
             p1->setPicture(":/character/bandit_0_mirror",240,0);
         else if(moving_state >= 20 && moving_state < 25)
             p1->setPicture(":/character/bandit_0_mirror",160,0);
+    }
+
+    if(moving_state %13 == 0){
+        QSound::play(":/sound_effect/walk");
     }
 }
 

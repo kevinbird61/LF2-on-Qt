@@ -12,10 +12,10 @@ MAKEFILE      = Makefile
 
 CC            = gcc
 CXX           = g++
-DEFINES       = -DQT_QML_DEBUG -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_CORE_LIB
+DEFINES       = -DQT_QML_DEBUG -DQT_WIDGETS_LIB -DQT_MULTIMEDIA_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_CORE_LIB
 CFLAGS        = -pipe -g -Wall -W -D_REENTRANT -fPIC $(DEFINES)
 CXXFLAGS      = -pipe -g -std=gnu++11 -Wall -W -D_REENTRANT -fPIC $(DEFINES)
-INCPATH       = -I. -I../../../Qt5.7.0/5.7/gcc_64/include -I../../../Qt5.7.0/5.7/gcc_64/include/QtWidgets -I../../../Qt5.7.0/5.7/gcc_64/include/QtGui -I../../../Qt5.7.0/5.7/gcc_64/include/QtCore -I. -I. -I../../../Qt5.7.0/5.7/gcc_64/mkspecs/linux-g++
+INCPATH       = -I. -I../../../Qt5.7.0/5.7/gcc_64/include -I../../../Qt5.7.0/5.7/gcc_64/include/QtWidgets -I../../../Qt5.7.0/5.7/gcc_64/include/QtMultimedia -I../../../Qt5.7.0/5.7/gcc_64/include/QtGui -I../../../Qt5.7.0/5.7/gcc_64/include/QtNetwork -I../../../Qt5.7.0/5.7/gcc_64/include/QtCore -I. -I. -I../../../Qt5.7.0/5.7/gcc_64/mkspecs/linux-g++
 QMAKE         = /home/kevin/Qt5.7.0/5.7/gcc_64/bin/qmake
 DEL_FILE      = rm -f
 CHK_DIR_EXISTS= test -d
@@ -36,7 +36,7 @@ DISTNAME      = lf2_Qt1.0.0
 DISTDIR = /home/kevin/Dropbox/LF2-on-Qt/lf2_Qt/.tmp/lf2_Qt1.0.0
 LINK          = g++
 LFLAGS        = -Wl,-rpath,/home/kevin/Qt5.7.0/5.7/gcc_64/lib
-LIBS          = $(SUBLIBS) -L/home/kevin/Qt5.7.0/5.7/gcc_64/lib -lQt5Widgets -L/usr/lib64 -lQt5Gui -lQt5Core -lGL -lpthread 
+LIBS          = $(SUBLIBS) -L/home/kevin/Qt5.7.0/5.7/gcc_64/lib -lQt5Widgets -L/usr/lib64 -lQt5Multimedia -lQt5Gui -lQt5Network -lQt5Core -lGL -lpthread 
 AR            = ar cqs
 RANLIB        = 
 SED           = sed
@@ -381,7 +381,9 @@ Makefile: lf2_Qt.pro ../../../Qt5.7.0/5.7/gcc_64/mkspecs/linux-g++/qmake.conf ..
 		lf2_Qt.pro \
 		resource.qrc \
 		../../../Qt5.7.0/5.7/gcc_64/lib/libQt5Widgets.prl \
+		../../../Qt5.7.0/5.7/gcc_64/lib/libQt5Multimedia.prl \
 		../../../Qt5.7.0/5.7/gcc_64/lib/libQt5Gui.prl \
+		../../../Qt5.7.0/5.7/gcc_64/lib/libQt5Network.prl \
 		../../../Qt5.7.0/5.7/gcc_64/lib/libQt5Core.prl
 	$(QMAKE) -spec linux-g++ CONFIG+=debug CONFIG+=qml_debug -o Makefile lf2_Qt.pro
 ../../../Qt5.7.0/5.7/gcc_64/mkspecs/features/spec_pre.prf:
@@ -536,7 +538,9 @@ Makefile: lf2_Qt.pro ../../../Qt5.7.0/5.7/gcc_64/mkspecs/linux-g++/qmake.conf ..
 lf2_Qt.pro:
 resource.qrc:
 ../../../Qt5.7.0/5.7/gcc_64/lib/libQt5Widgets.prl:
+../../../Qt5.7.0/5.7/gcc_64/lib/libQt5Multimedia.prl:
 ../../../Qt5.7.0/5.7/gcc_64/lib/libQt5Gui.prl:
+../../../Qt5.7.0/5.7/gcc_64/lib/libQt5Network.prl:
 ../../../Qt5.7.0/5.7/gcc_64/lib/libQt5Core.prl:
 qmake: FORCE
 	@$(QMAKE) -spec linux-g++ CONFIG+=debug CONFIG+=qml_debug -o Makefile lf2_Qt.pro
@@ -584,6 +588,7 @@ compiler_rcc_clean:
 	-$(DEL_FILE) qrc_resource.cpp
 qrc_resource.cpp: resource.qrc \
 		../../../Qt5.7.0/5.7/gcc_64/bin/rcc \
+		sound/bgm/main.mp3 \
 		Image/character/bandit/bandit_0_mirror.png \
 		Image/character/bandit/bandit_s.bmp \
 		Image/character/bandit/bandit_f.bmp \
@@ -592,6 +597,7 @@ qrc_resource.cpp: resource.qrc \
 		Image/character/bandit/bandit_0b_mirror.bmp \
 		Image/character/bandit/bandit_0b.bmp \
 		Image/character/bandit/bandit_1b_mirror.bmp \
+		sound/effect/walk3.wav \
 		Image/bg/stage1/forestm4.bmp \
 		Image/bg/stage1/forests.bmp \
 		Image/bg/stage1/land1.bmp \
@@ -724,9 +730,27 @@ moc_mainwindow.cpp: ../../../Qt5.7.0/5.7/gcc_64/include/QtWidgets/QMainWindow \
 		../../../Qt5.7.0/5.7/gcc_64/include/QtGui/QPixmap \
 		../../../Qt5.7.0/5.7/gcc_64/include/QtGui/QKeyEvent \
 		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/QDebug \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtMultimedia/QSound \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtMultimedia/qsound.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtMultimedia/qtmultimediadefs.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtMultimedia/QMediaPlayer \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtMultimedia/qmediaplayer.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtMultimedia/qmediaobject.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtMultimedia/qmultimedia.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtMultimedia/qmediacontent.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtMultimedia/qmediaresource.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtNetwork/qnetworkrequest.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/QSharedDataPointer \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/QString \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/QUrl \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/QVariant \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtMultimedia/qmediaenumdebug.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/qmetaobject.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtMultimedia/qaudio.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtNetwork/qnetworkconfiguration.h \
 		mainwindow.h \
 		../../../Qt5.7.0/5.7/gcc_64/bin/moc
-	/home/kevin/Qt5.7.0/5.7/gcc_64/bin/moc $(DEFINES) -I/home/kevin/Qt5.7.0/5.7/gcc_64/mkspecs/linux-g++ -I/home/kevin/Dropbox/LF2-on-Qt/lf2_Qt -I/home/kevin/Qt5.7.0/5.7/gcc_64/include -I/home/kevin/Qt5.7.0/5.7/gcc_64/include/QtWidgets -I/home/kevin/Qt5.7.0/5.7/gcc_64/include/QtGui -I/home/kevin/Qt5.7.0/5.7/gcc_64/include/QtCore -I/usr/include/c++/5 -I/usr/include/x86_64-linux-gnu/c++/5 -I/usr/include/c++/5/backward -I/usr/lib/gcc/x86_64-linux-gnu/5/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include mainwindow.h -o moc_mainwindow.cpp
+	/home/kevin/Qt5.7.0/5.7/gcc_64/bin/moc $(DEFINES) -I/home/kevin/Qt5.7.0/5.7/gcc_64/mkspecs/linux-g++ -I/home/kevin/Dropbox/LF2-on-Qt/lf2_Qt -I/home/kevin/Qt5.7.0/5.7/gcc_64/include -I/home/kevin/Qt5.7.0/5.7/gcc_64/include/QtWidgets -I/home/kevin/Qt5.7.0/5.7/gcc_64/include/QtMultimedia -I/home/kevin/Qt5.7.0/5.7/gcc_64/include/QtGui -I/home/kevin/Qt5.7.0/5.7/gcc_64/include/QtNetwork -I/home/kevin/Qt5.7.0/5.7/gcc_64/include/QtCore -I/usr/include/c++/5 -I/usr/include/x86_64-linux-gnu/c++/5 -I/usr/include/c++/5/backward -I/usr/lib/gcc/x86_64-linux-gnu/5/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include mainwindow.h -o moc_mainwindow.cpp
 
 compiler_moc_source_make_all:
 compiler_moc_source_clean:
@@ -864,6 +888,24 @@ main.o: main.cpp mainwindow.h \
 		../../../Qt5.7.0/5.7/gcc_64/include/QtGui/QPixmap \
 		../../../Qt5.7.0/5.7/gcc_64/include/QtGui/QKeyEvent \
 		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/QDebug \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtMultimedia/QSound \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtMultimedia/qsound.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtMultimedia/qtmultimediadefs.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtMultimedia/QMediaPlayer \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtMultimedia/qmediaplayer.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtMultimedia/qmediaobject.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtMultimedia/qmultimedia.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtMultimedia/qmediacontent.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtMultimedia/qmediaresource.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtNetwork/qnetworkrequest.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/QSharedDataPointer \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/QString \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/QUrl \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/QVariant \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtMultimedia/qmediaenumdebug.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/qmetaobject.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtMultimedia/qaudio.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtNetwork/qnetworkconfiguration.h \
 		../../../Qt5.7.0/5.7/gcc_64/include/QtWidgets/QApplication \
 		../../../Qt5.7.0/5.7/gcc_64/include/QtWidgets/qapplication.h \
 		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/qcoreapplication.h \
@@ -991,6 +1033,24 @@ mainwindow.o: mainwindow.cpp mainwindow.h \
 		../../../Qt5.7.0/5.7/gcc_64/include/QtGui/QPixmap \
 		../../../Qt5.7.0/5.7/gcc_64/include/QtGui/QKeyEvent \
 		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/QDebug \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtMultimedia/QSound \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtMultimedia/qsound.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtMultimedia/qtmultimediadefs.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtMultimedia/QMediaPlayer \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtMultimedia/qmediaplayer.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtMultimedia/qmediaobject.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtMultimedia/qmultimedia.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtMultimedia/qmediacontent.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtMultimedia/qmediaresource.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtNetwork/qnetworkrequest.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/QSharedDataPointer \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/QString \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/QUrl \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/QVariant \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtMultimedia/qmediaenumdebug.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/qmetaobject.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtMultimedia/qaudio.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtNetwork/qnetworkconfiguration.h \
 		ui_mainwindow.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o mainwindow.o mainwindow.cpp
 
@@ -1101,7 +1161,25 @@ stageselect.o: stageselect.cpp stageselect.h \
 		../../../Qt5.7.0/5.7/gcc_64/include/QtWidgets/qgraphicsitem.h \
 		../../../Qt5.7.0/5.7/gcc_64/include/QtGui/QPixmap \
 		../../../Qt5.7.0/5.7/gcc_64/include/QtGui/QKeyEvent \
-		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/QDebug
+		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/QDebug \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtMultimedia/QSound \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtMultimedia/qsound.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtMultimedia/qtmultimediadefs.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtMultimedia/QMediaPlayer \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtMultimedia/qmediaplayer.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtMultimedia/qmediaobject.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtMultimedia/qmultimedia.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtMultimedia/qmediacontent.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtMultimedia/qmediaresource.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtNetwork/qnetworkrequest.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/QSharedDataPointer \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/QString \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/QUrl \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/QVariant \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtMultimedia/qmediaenumdebug.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtCore/qmetaobject.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtMultimedia/qaudio.h \
+		../../../Qt5.7.0/5.7/gcc_64/include/QtNetwork/qnetworkconfiguration.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o stageselect.o stageselect.cpp
 
 gameitem.o: gameitem.cpp gameitem.h \

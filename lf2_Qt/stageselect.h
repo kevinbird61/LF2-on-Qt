@@ -6,6 +6,8 @@
 #include <player.h>
 #include <QKeyEvent>
 #include <QDebug>
+#include <QSound>
+#include <QMediaPlayer>
 
 class StageSelect : public QGraphicsScene
 {
@@ -18,6 +20,7 @@ public:
     QPointF getPlayerLoc();
 private:
     Player *p1;
+    QMediaPlayer *bgm;
     int p1_loc_x;
     int p1_loc_y;
     int y_limit;
